@@ -1,5 +1,6 @@
 import random as rd
 import time
+import sys
 
 MINUSCULAS = 'abcdefghijklmnopqrstuvwxyz'
 MAIUSCULAS = MINUSCULAS.upper()
@@ -8,9 +9,11 @@ NUMEROS = '1234567890'
 STRINGS = [MINUSCULAS, MAIUSCULAS, ESPECIAIS, NUMEROS]
 
 def initialize_seed():
-    seed_input = input('Insira a senha que você quer transformar: ')
+    seed_input = input('Insira a senha que você quer transformar (ou digite [sair] caso queira sair): ')
     if seed_input == '':
         seed_input = time.time()
+    elif seed_input == '[sair]':
+        quit()
     else:
         seed_input = seed_converter(seed_input)
     rd.seed(hash(seed_input))
@@ -29,9 +32,10 @@ def gerar_senha():
     return ''.join(senha)
 
 def main():
-    initialize_seed()
-    senha = gerar_senha()
-    print(f'Essa é a sua senha: {senha}\nGuarde-a bem')
+    while True:
+        initialize_seed()
+        senha = gerar_senha()
+        print(f'Essa é a sua senha: {senha}\nGuarde-a bem')
 
 if __name__ == '__main__':
     main()
